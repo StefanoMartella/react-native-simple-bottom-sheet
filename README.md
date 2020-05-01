@@ -14,11 +14,15 @@ Simple React Native component to display a draggable panel from the bottom of th
 * [Installation](#installation)
 * [Usage](#usage)
 * [Props](#props)
-* [Functions](#functions)
+* [Methods](#methods)
 
 ## Installation
 
-`npm i --save react-native-slider-panel`
+`npm i --save StefanoMartella/react-native-slider-panel`
+
+TODO:
+
+ - Make installation available via `npm i --save react-native-slider-panel`
 
 ## Usage
 
@@ -113,7 +117,7 @@ function App() {
 | lineContainerStyle | object      | `{}`                                    | Custom style for the line container                                                                                                                                                      |
 | lineStyle          | object      | `{}`                                    | Custom style for the line                                                                                                                                                                |
 
-## Functions
+## Methods
 
 | Name         | Description                      |
 |--------------|----------------------------------|
