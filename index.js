@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {Component} from 'react';
 import {
   Animated,
   BackHandler,
@@ -9,148 +9,152 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function SliderPanel({
-  children,
-  isOpen,
-  sliderMinHeight,
-  sliderMaxHeight,
-  animation,
-  animationDuration,
-  onOpen,
-  onClose,
-  onScrollEndDrag,
-  wrapperStyle,
-  outerContentStyle,
-  innerContentStyle,
-  lineContainerStyle,
-  lineStyle,
-}) {
-  const isPanelOpened = useRef(isOpen);
-  const animatedValue = useRef(new Animated.Value(0));
-  const contentHeight = useRef(null);
-  // Used to prevent blink effect when isOpen is false
-  const [visible, setVisible] = useState(isOpen);
+class SliderPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animatedValue: new Animated.Value(0),
+      isPanelVisible: props.isOpen,
+      isPanelOpened: props.isOpen,
+      contentHeight: null,
+    };
+    this._setResponders();
+  }
 
-  const toggleSlider = useCallback(() => {
-      const toValue =
-        animatedValue.current._value === 0
-          ? contentHeight.current - sliderMinHeight
-          : 0;
-      Animated.timing(animatedValue.current, {
-        duration: animationDuration,
-        easing: animation,
-        toValue,
-        useNativeDriver: false,
-      }).start(() => {
-        isPanelOpened.current = !toValue;
-        if (isPanelOpened.current) {
+  togglePanel = () => {
+    const {contentHeight, animatedValue, isPanelOpened} = this.state;
+    const {
+      animationDuration,
+      animation,
+      sliderMinHeight,
+      onOpen,
+      onClose,
+    } = this.props;
+
+    const toValue =
+      animatedValue._value === 0 ? contentHeight - sliderMinHeight : 0;
+    Animated.timing(animatedValue, {
+      duration: animationDuration,
+      easing: animation,
+      toValue,
+      useNativeDriver: false,
+    }).start(() => {
+      this.setState({isPanelOpened: !toValue}, () => {
+        if (!isPanelOpened) {
           onOpen();
         } else {
           onClose();
           Keyboard.dismiss();
         }
       });
-    },
-    [contentHeight, animatedValue],
-  );
+    });
+  }
 
-  useEffect(() => {
-    const onBackPress = () => {
-      isPanelOpened.current && toggleSlider();
-      return isPanelOpened.current;
-    };
+  _onBackPress = () => {
+    this.state.isPanelOpened && this.togglePanel();
+    return this.state.isPanelOpened;
+  }
 
-    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
+  }
 
-    return () =>
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-  }, [toggleSlider]);
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
+  }
 
-  const parentPanResponder = PanResponder.create({
-    onStartShouldSetResponderCapture: () => false,
-    onMoveShouldSetPanResponderCapture: () => !isPanelOpened.current,
-    onPanResponderRelease: () => toggleSlider(),
-  });
+  _setResponders() {
+    this._parentPanResponder = PanResponder.create({
+      onStartShouldSetResponderCapture: () => false,
+      onMoveShouldSetPanResponderCapture: () => !this.state.isPanelOpened,
+      onPanResponderRelease: () => this.togglePanel(),
+    });
 
-  const childPanResponder = PanResponder.create({
-    onStartShouldSetResponderCapture: () => false,
-    onMoveShouldSetPanResponderCapture: (_, gestureState) =>
-      gestureState.dy > 15,
-    onPanResponderRelease: (_, gestureState) =>
-      gestureState.dy > 0 && toggleSlider(),
-  });
+    this._childPanResponder = PanResponder.create({
+      onStartShouldSetResponderCapture: () => false,
+      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
+        gestureState.dy > 15,
+      onPanResponderRelease: (_, gestureState) =>
+        gestureState.dy > 0 && this.togglePanel(),
+    });
+  }
 
-  const handleScrollEndDrag = useCallback((event) => {
-      event.nativeEvent.contentOffset.y === 0 && toggleSlider();
-        onScrollEndDrag(event); // Custom behaviour
-      },
-    [toggleSlider],
-  );
+  _handleScrollEndDrag = ({nativeEvent}) => {
+    nativeEvent.contentOffset.y === 0 && this.togglePanel();
+  }
 
-  const setSize = useCallback(({nativeEvent}) => {
-      contentHeight.current = nativeEvent.layout.height;
-      if(!isOpen && contentHeight.current) {
-        animatedValue.current.setValue(contentHeight.current - sliderMinHeight);
-        setVisible(true);
+  _setSize = ({nativeEvent}) => {
+    this.setState({contentHeight: nativeEvent.layout.height}, () => {
+      const {isOpen, sliderMinHeight} = this.props;
+      const {animatedValue, contentHeight} = this.state;
+      if (!isOpen && contentHeight) {
+        animatedValue.setValue(contentHeight - sliderMinHeight);
+        this.setState({isPanelVisible: true});
       }
-    },
-    [contentHeight, visible, setVisible],
-  );
+    });
+  }
 
-  return (
-    <Animated.View
-      onLayout={setSize}
-      {...parentPanResponder.panHandlers}
-      style={{
-        ...styles.container,
-        ...wrapperStyle,
-        maxHeight: sliderMaxHeight,
-        transform: [
-          {translateY: animatedValue.current},
-          {scale: visible ? 1: 0},
-        ],
-      }}>
-      <View
-        style={[styles.outerContent, outerContentStyle]}
-        {...childPanResponder.panHandlers}>
-        <TouchableOpacity onPress={toggleSlider} activeOpacity={1}>
-          <View style={[styles.lineContainer, lineContainerStyle]}>
-            <View style={[styles.line, lineStyle]} />
+  render() {
+    const {isPanelVisible, animatedValue} = this.state;
+    const {
+      sliderMaxHeight,
+      wrapperStyle,
+      outerContentStyle,
+      innerContentStyle,
+      lineContainerStyle,
+      lineStyle,
+      children,
+    } = this.props;
+
+    return (
+      <Animated.View
+        onLayout={this._setSize}
+        {...this._parentPanResponder.panHandlers}
+        style={{
+          ...styles.container,
+          ...wrapperStyle,
+          maxHeight: sliderMaxHeight,
+          transform: [
+            {translateY: animatedValue},
+            {scale: isPanelVisible ? 1 : 0},
+          ],
+        }}>
+        <View
+          style={[styles.outerContent, outerContentStyle]}
+          {...this._childPanResponder.panHandlers}>
+          <TouchableOpacity onPress={this.togglePanel} activeOpacity={1}>
+            <View style={[styles.lineContainer, lineContainerStyle]}>
+              <View style={[styles.line, lineStyle]} />
+            </View>
+          </TouchableOpacity>
+          <View style={[styles.innerContent, innerContentStyle]}>
+            {typeof children === 'function'
+              ? children(this._handleScrollEndDrag)
+              : children}
           </View>
-        </TouchableOpacity>
-        <View style={[styles.innerContent, innerContentStyle]}>
-          {typeof children === 'function'
-            ? children(handleScrollEndDrag)
-            : children
-          }
         </View>
-      </View>
-    </Animated.View>
-  );
+      </Animated.View>
+    );
+  }
 }
 
 SliderPanel.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   isOpen: PropTypes.bool,
   sliderMaxHeight: PropTypes.number,
   sliderMinHeight: (props, propName, _) => {
-    if (props[propName] < 50) {
-      return new Error('Min value cannot be lower than 50');
-    } else if (props[propName] > props.sliderMaxHeight) {
+    if (props[propName] > props.sliderMaxHeight) {
       return new Error(
-        'sliderMinHeight value cannot be greater than sliderMaxHeight');
+        'sliderMinHeight value cannot be greater than sliderMaxHeight',
+      );
     }
   },
   animation: PropTypes.func,
   animationDuration: PropTypes.number,
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
-  onScrollEndDrag: PropTypes.func,
   wrapperStyle: PropTypes.object,
   outerContentStyle: PropTypes.object,
   innerContentStyle: PropTypes.object,
@@ -167,13 +171,12 @@ SliderPanel.defaultProps = {
   animationDuration: 200,
   onOpen: () => null,
   onClose: () => null,
-  onScrollEndDrag: () => null,
   wrapperStyle: {},
   outerContentStyle: {},
   innerContentStyle: {},
   lineContainerStyle: {},
   lineStyle: {},
-}
+};
 
 const styles = {
   container: {
