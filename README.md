@@ -66,7 +66,7 @@ function App() {
 }
 ```
 
-This allows the panel to close when the user reaches the top of the scrollable content and drag the panel down again. Example:
+This allows the panel to close when the user reaches the top of the scrollable content and drags the panel down again. Example:
 
 <br />
 <img src="./gif/scroll.gif" alt="scroll"  width="30%">
