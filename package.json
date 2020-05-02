@@ -1,6 +1,6 @@
 {
   "name": "react-native-slider-panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A react native component that allows you to slide a panel from the bottom of the screen",
   "main": "index.js",
   "scripts": {

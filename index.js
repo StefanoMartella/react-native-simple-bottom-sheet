@@ -50,12 +50,12 @@ class SliderPanel extends Component {
         }
       });
     });
-  }
+  };
 
   _onBackPress = () => {
     this.state.isPanelOpened && this.togglePanel();
     return this.state.isPanelOpened;
-  }
+  };
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
@@ -67,13 +67,11 @@ class SliderPanel extends Component {
 
   _setPanResponders() {
     this._parentPanResponder = PanResponder.create({
-      onStartShouldSetResponderCapture: () => false,
       onMoveShouldSetPanResponderCapture: () => !this.state.isPanelOpened,
       onPanResponderRelease: () => this.togglePanel(),
     });
 
     this._childPanResponder = PanResponder.create({
-      onStartShouldSetResponderCapture: () => false,
       onMoveShouldSetPanResponderCapture: (_, gestureState) =>
         gestureState.dy > 15,
       onPanResponderRelease: (_, gestureState) =>
@@ -83,7 +81,7 @@ class SliderPanel extends Component {
 
   _handleScrollEndDrag = ({nativeEvent}) => {
     nativeEvent.contentOffset.y === 0 && this.togglePanel();
-  }
+  };
 
   _setSize = ({nativeEvent}) => {
     this.setState({contentHeight: nativeEvent.layout.height}, () => {
@@ -94,7 +92,7 @@ class SliderPanel extends Component {
         this.setState({isPanelVisible: true});
       }
     });
-  }
+  };
 
   render() {
     const {isPanelVisible, animatedValue} = this.state;

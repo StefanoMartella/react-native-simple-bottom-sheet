@@ -16,11 +16,7 @@ Simple React Native component to display a draggable panel from the bottom of th
 
 ## Installation
 
-`npm i --save StefanoMartella/react-native-slider-panel`
-
-TODO:
-
- - Make installation available via `npm i --save react-native-slider-panel`
+`npm i --save react-native-slider-panel`
 
 ## Usage
 
