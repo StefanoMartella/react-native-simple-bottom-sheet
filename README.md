@@ -3,8 +3,8 @@
 Simple React Native component to display a draggable panel from the bottom of the screen
 
 <div style="display: flex; justify-content: space-between">
-  <img src="./gif/example.gif" alt="example1" width="30%">
-  <img src="./gif/scroll.gif" alt="example2"  width="30%">
+  <img src="./gif/example1.gif" alt="example1" width="30%">
+  <img src="./gif/example2.gif" alt="example2"  width="30%">
   <img src="./gif/toggle.gif" alt="example3"  width="30%">
 </div>
 
@@ -103,7 +103,7 @@ function App() {
 ## Props
 | Prop Name          | Type        | Default                                 | Description                                                                                                                                                                              |
 |--------------------|-------------|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| children           | func or obj | `null`                                  | A component or a render function. Use toggleSlider function instead                                                                                                                                  |
+| children           | func or node | `<View />`                                  | A component or a render function. Use toggleSlider function instead                                                                                                                                  |
 | isOpen             | boolean     | `true`                                  | Initial state of the panel; true to render it opened, false otherwise. <b>Important: Do not try to open/close the panel througth this prop, see `togglePanel` method instead</b> |
 | sliderMinHeight    | number      | `50`                                    | Min height of the panel                                                                                                                                                                  |
 | sliderMaxHeight    | number      | `Dimensions.get('window').height * 0.5` | Max height of the panel                                                                                                                                                                  |

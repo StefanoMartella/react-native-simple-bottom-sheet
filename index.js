@@ -18,9 +18,9 @@ class SliderPanel extends Component {
       animatedValue: new Animated.Value(0),
       isPanelVisible: props.isOpen,
       isPanelOpened: props.isOpen,
-      contentHeight: null,
+      contentHeight: undefined,
     };
-    this._setResponders();
+    this._setPanResponders();
   }
 
   togglePanel = () => {
@@ -41,8 +41,8 @@ class SliderPanel extends Component {
       toValue,
       useNativeDriver: false,
     }).start(() => {
-      this.setState({isPanelOpened: !toValue}, () => {
-        if (!isPanelOpened) {
+      this.setState({isPanelOpened: !isPanelOpened}, () => {
+        if (this.state.isPanelOpened) {
           onOpen();
         } else {
           onClose();
@@ -65,7 +65,7 @@ class SliderPanel extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
   }
 
-  _setResponders() {
+  _setPanResponders() {
     this._parentPanResponder = PanResponder.create({
       onStartShouldSetResponderCapture: () => false,
       onMoveShouldSetPanResponderCapture: () => !this.state.isPanelOpened,
@@ -141,7 +141,7 @@ class SliderPanel extends Component {
 }
 
 SliderPanel.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   isOpen: PropTypes.bool,
   sliderMaxHeight: PropTypes.number,
   sliderMinHeight: (props, propName, _) => {
@@ -163,7 +163,7 @@ SliderPanel.propTypes = {
 };
 
 SliderPanel.defaultProps = {
-  children: null,
+  children: <View />,
   isOpen: true,
   sliderMaxHeight: Dimensions.get('window').height * 0.5,
   sliderMinHeight: 50,
