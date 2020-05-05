@@ -1,4 +1,4 @@
-# react-native-slider-panel
+# react-native-simple-bottom-sheet
 
 A simple react native bottom sheet component
 
