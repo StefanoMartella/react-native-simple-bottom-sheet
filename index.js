@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-class SliderPanel extends Component {
+class BottomSheet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,7 +138,7 @@ class SliderPanel extends Component {
   }
 }
 
-SliderPanel.propTypes = {
+BottomSheet.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   isOpen: PropTypes.bool,
   sliderMaxHeight: PropTypes.number,
@@ -160,7 +160,7 @@ SliderPanel.propTypes = {
   lineStyle: PropTypes.object,
 };
 
-SliderPanel.defaultProps = {
+BottomSheet.defaultProps = {
   children: <View />,
   isOpen: true,
   sliderMaxHeight: Dimensions.get('window').height * 0.5,
@@ -218,4 +218,4 @@ const styles = {
   },
 };
 
-export default SliderPanel;
+export default BottomSheet;

@@ -1,14 +1,14 @@
 {
-  "name": "react-native-slider-panel",
-  "version": "1.0.1",
-  "description": "A react native component that allows you to slide a panel from the bottom of the screen",
+  "name": "react-native-simple-bottom-sheet",
+  "version": "1.0.0",
+  "description": "A simple react native bottom sheet component",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StefanoMartella/react-native-slider-panel.git"
+    "url": "git+https://github.com/StefanoMartella/react-native-simple-bottom-sheet.git"
   },
   "keywords": [
     "react",
@@ -17,6 +17,9 @@
     "react native",
     "slider",
     "panel",
+    "bottom-sheet",
+    "sheet",
+    "simple",
     "slider-panel",
     "bottom",
     "bottom-slider",
@@ -27,9 +30,9 @@
   "author": "Stefano Martella <stefano.martella9614@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/StefanoMartella/react-native-slider-panel/issues"
+    "url": "https://github.com/StefanoMartella/react-native-simple-bottom-sheet/issues"
   },
-  "homepage": "https://github.com/StefanoMartella/react-native-slider-panel#readme",
+  "homepage": "https://github.com/StefanoMartella/react-native-simple-bottom-sheet#readme",
   "dependencies": {
     "prop-types": "^15.7.2"
   },

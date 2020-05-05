@@ -1,6 +1,6 @@
 # react-native-slider-panel
 
-Simple React Native component to display a draggable panel from the bottom of the screen
+A simple react native bottom sheet component
 
  Example 1                 | Example 2                 | Example 3
 :-------------------------:|:-------------------------:|:-------------------------:
@@ -16,21 +16,21 @@ Simple React Native component to display a draggable panel from the bottom of th
 
 ## Installation
 
-`npm i --save react-native-slider-panel`
+`npm i --save react-native-simple-bottom-sheet`
 
 ## Usage
 
 ```javascript
-import SliderPanel from 'react-native-slider-panel';
+import BottomSheet from 'react-native-simple-bottom-sheet';
 
 function App() {
   return (
     <View style={{flex: 1}}>
       <View>Your content</View>
-      <SliderPanel isOpen>
+      <BottomSheet isOpen>
         // The component to render inside the panel
         <View />
-      </SliderPanel>
+      </BottomSheet>
     </View>
   );
 }
@@ -44,7 +44,7 @@ function App() {
   return (
     <View style={{flex: 1}}>
       <View>Your content</View>
-      <SliderPanel isOpen>
+      <BottomSheet isOpen>
         {(onScrollEndDrag) => (
           <ScrollView onScrollEndDrag={onScrollEndDrag}>
             {[...Array(10)].map((_, index) => (
@@ -54,7 +54,7 @@ function App() {
             ))}
           </ScrollView>
         )}
-      </SliderPanel>
+      </BottomSheet>
     </View>
   );
 }
@@ -82,11 +82,11 @@ function App() {
       <TouchableOpacity onPress={() => panelRef.current.togglePanel()}>
         <Text>Toggle</Text>
       </TouchableOpacity>
-      <SliderPanel ref={ref => panelRef.current = ref}>
+      <BottomSheet ref={ref => panelRef.current = ref}>
         <Text style={{paddingVertical: 20}}>
           Some random content
         </Text>
-      </SliderPanel>
+      </BottomSheet>
     </View>
   );
 }
