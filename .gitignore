@@ -1,4 +1,4 @@
-  
+
 # Logs
 logs
 *.log
@@ -117,3 +117,5 @@ dist
 .pnp.*
 
 package-lock.json
+
+testcomponent/

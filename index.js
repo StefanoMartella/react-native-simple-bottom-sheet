@@ -18,6 +18,7 @@ class BottomSheet extends Component {
       animatedValue: new Animated.Value(0),
       isPanelVisible: props.isOpen,
       isPanelOpened: props.isOpen,
+      scrollTopCounter: 1,
       contentHeight: undefined,
     };
     this._setPanResponders();
@@ -80,7 +81,17 @@ class BottomSheet extends Component {
   }
 
   _handleScrollEndDrag = ({nativeEvent}) => {
-    nativeEvent.contentOffset.y === 0 && this.togglePanel();
+    if (nativeEvent.contentOffset.y === 0) {
+      if (this.state.scrollTopCounter === 1) {
+        this.togglePanel();
+      } else {
+        this.setState((oldState) => ({
+          scrollTopCounter: oldState.scrollTopCounter + 1,
+        }));
+      }
+    } else {
+      this.setState({scrollTopCounter: 0});
+    }
   };
 
   _setSize = ({nativeEvent}) => {
