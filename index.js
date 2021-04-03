@@ -15,17 +15,16 @@ class BottomSheet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animatedValue: new Animated.Value(0),
       isPanelVisible: props.isOpen,
       isPanelOpened: props.isOpen,
-      scrollTopCounter: 1,
       contentHeight: undefined,
     };
+    this.panelHeightValue = new Animated.Value(0);
     this._setPanResponders();
   }
 
   togglePanel = () => {
-    const {contentHeight, animatedValue, isPanelOpened} = this.state;
+    const {contentHeight, isPanelOpened} = this.state;
     const {
       animationDuration,
       animation,
@@ -34,12 +33,12 @@ class BottomSheet extends Component {
       onClose,
     } = this.props;
 
-    const toValue =
-      animatedValue._value === 0 ? contentHeight - sliderMinHeight : 0;
-    Animated.timing(animatedValue, {
+    Animated.timing(this.panelHeightValue, {
       duration: animationDuration,
       easing: animation,
-      toValue,
+      toValue: this.panelHeightValue._value === 0
+        ? contentHeight - sliderMinHeight
+        : 0,
       useNativeDriver: false,
     }).start(() => {
       this.setState({isPanelOpened: !isPanelOpened}, () => {
@@ -81,32 +80,22 @@ class BottomSheet extends Component {
   }
 
   _handleScrollEndDrag = ({nativeEvent}) => {
-    if (nativeEvent.contentOffset.y === 0) {
-      if (this.state.scrollTopCounter === 1) {
-        this.togglePanel();
-      } else {
-        this.setState((oldState) => ({
-          scrollTopCounter: oldState.scrollTopCounter + 1,
-        }));
-      }
-    } else {
-      this.setState({scrollTopCounter: 0});
-    }
+    nativeEvent.contentOffset.y === 0 && this.togglePanel();
   };
 
   _setSize = ({nativeEvent}) => {
     this.setState({contentHeight: nativeEvent.layout.height}, () => {
       const {isOpen, sliderMinHeight} = this.props;
-      const {animatedValue, contentHeight} = this.state;
+      const {contentHeight} = this.state;
       if (!isOpen && contentHeight) {
-        animatedValue.setValue(contentHeight - sliderMinHeight);
+        this.panelHeightValue.setValue(contentHeight - sliderMinHeight);
         this.setState({isPanelVisible: true});
       }
     });
   };
 
   render() {
-    const {isPanelVisible, animatedValue} = this.state;
+    const {isPanelVisible} = this.state;
     const {
       sliderMaxHeight,
       wrapperStyle,
@@ -126,7 +115,7 @@ class BottomSheet extends Component {
           ...wrapperStyle,
           maxHeight: sliderMaxHeight,
           transform: [
-            {translateY: animatedValue},
+            {translateY: this.panelHeightValue},
             {scale: isPanelVisible ? 1 : 0},
           ],
         }}>
