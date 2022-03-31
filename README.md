@@ -1,18 +1,19 @@
 # react-native-simple-bottom-sheet
 
+  [![CodeFactor](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet/badge)](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8db64b8b3d2347469aac4fe2032053f4)](https://www.codacy.com/gh/StefanoMartella/react-native-simple-bottom-sheet/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=StefanoMartella/react-native-simple-bottom-sheet&amp;utm_campaign=Badge_Grade) ![GithubStart](https://badgen.net/github/stars/StefanoMartella/react-native-simple-bottom-sheet) ![GithubLicense](https://badgen.net/github/license/StefanoMartella/react-native-simple-bottom-sheet) ![NpmVersion](https://badgen.net/npm/v/react-native-simple-bottom-sheet) ![NpmMonthlyDownloads](https://badgen.net/npm/dm/react-native-simple-bottom-sheet)
+
 A simple react native bottom sheet component
 
- Example 1                 | Example 2                 | Example 3
+Example 1                 | Example 2                 | Example 3
 :-------------------------:|:-------------------------:|:-------------------------:
- ![](./gif/example1.gif)   | ![](./gif/example2.gif)   | ![](./gif/toggle.gif)
-
+![](./gif/example1.gif)   | ![](./gif/example2.gif)   | ![](./gif/toggle.gif)
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Props](#props)
-* [Methods](#methods)
+*   [Installation](#installation)
+*   [Usage](#usage)
+*   [Props](#props)
+*   [Methods](#methods)
 
 ## Installation
 
@@ -99,6 +100,7 @@ function App() {
 <br />
 
 ## Props
+
 | Prop Name          | Type        | Default                                 | Description                                                                                                                                                                              |
 |--------------------|-------------|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | children           | func or node | `<View />`                                  | A component or a render function. Use toggleSlider function instead                                                                                                                                  |
