@@ -1,5 +1,7 @@
 # react-native-simple-bottom-sheet
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/607dc67ce0fe4f7c8405cfacfe18d8c9)](https://app.codacy.com/gh/StefanoMartella/react-native-simple-bottom-sheet?utm_source=github.com&utm_medium=referral&utm_content=StefanoMartella/react-native-simple-bottom-sheet&utm_campaign=Badge_Grade_Settings)
+
 A simple react native bottom sheet component
 
  Example 1                 | Example 2                 | Example 3
