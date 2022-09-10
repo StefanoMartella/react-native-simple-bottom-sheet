@@ -1,6 +1,6 @@
 # react-native-simple-bottom-sheet
 
-  [![CodeFactor](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet/badge)](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8db64b8b3d2347469aac4fe2032053f4)](https://www.codacy.com/gh/StefanoMartella/react-native-simple-bottom-sheet/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=StefanoMartella/react-native-simple-bottom-sheet&amp;utm_campaign=Badge_Grade) ![GithubStart](https://badgen.net/github/stars/StefanoMartella/react-native-simple-bottom-sheet) ![GithubLicense](https://badgen.net/github/license/StefanoMartella/react-native-simple-bottom-sheet) ![NpmVersion](https://badgen.net/npm/v/react-native-simple-bottom-sheet) ![NpmMonthlyDownloads](https://badgen.net/npm/dm/react-native-simple-bottom-sheet)
+  [![CodeFactor](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet/badge)](https://www.codefactor.io/repository/github/stefanomartella/react-native-simple-bottom-sheet) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8db64b8b3d2347469aac4fe2032053f4)](https://www.codacy.com/gh/StefanoMartella/react-native-simple-bottom-sheet/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=StefanoMartella/react-native-simple-bottom-sheet&amp;utm_campaign=Badge_Grade) ![GithubStart](https://badgen.net/github/stars/StefanoMartella/react-native-simple-bottom-sheet) ![GithubLicense](https://badgen.net/github/license/StefanoMartella/react-native-simple-bottom-sheet) ![NpmVersion](https://badgen.net/npm/v/react-native-simple-bottom-sheet) ![NpmMonthlyDownloads](https://badgen.net/npm/dm/react-native-simple-bottom-sheet) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=HXMYHURK4YX3E)
 
 A simple react native bottom sheet component
 
@@ -126,6 +126,12 @@ function App() {
 ## License
 
 <a href="./LICENSE.md">MIT</a>
+
+## Support
+
+If you enjoyed this project — or just feeling generous, consider buying me a beer. Cheers!
+
+<a href="https://www.paypal.com/donate/?hosted_button_id=HXMYHURK4YX3E"><img src="https://pics.paypal.com/00/s/MTU3YzM3NmMtYTllZC00MGY2LWJkMWEtODk4ZThmMjM2ODBi/file.PNG" height="40"></a> 
 
 ## Author
 
